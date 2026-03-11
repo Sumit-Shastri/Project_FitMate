@@ -1,5 +1,6 @@
 package com.fitmate.fitmate.controller;
 
+import com.fitmate.fitmate.dto.LoginRequest;
 import com.fitmate.fitmate.model.User;
 import com.fitmate.fitmate.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +17,11 @@ public class AuthController
     public User signup(@RequestBody User user)
     {
         return authService.signup(user);
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestBody LoginRequest request)
+    {
+        return authService.login(request);
     }
 }
