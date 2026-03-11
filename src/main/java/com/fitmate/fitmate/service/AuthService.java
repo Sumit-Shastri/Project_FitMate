@@ -3,6 +3,7 @@ package com.fitmate.fitmate.service;
 import com.fitmate.fitmate.dto.LoginRequest;
 import com.fitmate.fitmate.model.User;
 import com.fitmate.fitmate.repository.UserRepository;
+import com.fitmate.fitmate.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class AuthService
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     // SIGNUP LOGIC
     public User signup(User user)
@@ -40,7 +44,9 @@ public class AuthService
 
         if(passwordEncoder.matches(request.getPassword(), user.getPassword()))
         {
-            return "Login Succesfull";
+            String token;
+            token = jwtUtil.generateToken(user.getEmail());
+            return token;
         }
 
         else
