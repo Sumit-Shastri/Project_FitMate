@@ -22,4 +22,7 @@ public class User
     private Double height;
     private Double weight;
     private String goal;
+
+    public void setGa() {
+    }
 }
