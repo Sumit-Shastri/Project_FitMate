@@ -1,83 +1,86 @@
-import { useState } from "react";
+import { useApp } from "./context/AppContext.jsx";
+import AuthPage      from "./components/AuthPage.jsx";
+import SideBar       from "./components/SideB.jsx";
+import StatsRow      from "./components/StatsRow.jsx";
+import WorkoutChart  from "./components/WorkoutChart.jsx";
+import WorkoutList, { AddWorkoutModal } from "./components/Workouts.jsx";
+import Calendar      from "./components/Calender.jsx";
+import BMICalculator from "./components/BMICalculator.jsx";
+import Toast         from "./components/Toast.jsx";
+import './style/App.scss';
 
-import "./App.scss";
-import Sidebar from "./components/Sidebar";
-import StatCard from "./components/StatCard";
-import WorkoutActivity from "./components/WorkoutActivity";
-import Progress from "./components/Progress";
-import Subscription from "./components/Subscription";
-import Payment from "./components/Payment";
-import OfflineExercises from "./components/OfflineExercises";
-import ProfileCard from "./components/ProfileCard";
-import Calendar from "./components/Calendar";
-import VideoActivity from "./components/VideoActivity";
-import MostTrending from "./components/MostTrending";
-// ─── Mock Data ────────────────────────────────────────────────
-const workoutData = [
-  { day: "Sun", online: 20, offline: 40 },
-  { day: "Mon", online: 45, offline: 25 },
-  { day: "Tue", online: 30, offline: 55 },
-  { day: "Wed", online: 57, offline: 20 },
-  { day: "Thu", online: 40, offline: 45 },
-  { day: "Fri", online: 55, offline: 30 },
-  { day: "Sat", online: 50, offline: 40 },
-];
+function LoadingScreen() {
+  return (
+    <div className="loading-screen">
+      <div className="loading-screen__spinner" />
+      <p>Loading your dashboard...</p>
+    </div>
+  );
+}
 
-const calendarDays = [
-  { date: null, label: "" },
-  { date: 1 },
-  { date: 2 },
-  { date: 3 },
-  { date: 4 },
-  { date: 5 },
-  { date: 6 },
-  { date: 7, active: true },
-  { date: 8, active: true },
-  { date: 9, highlight: true },
-  { date: 10, today: true },
-  { date: 11 },
-  { date: 12 },
-  { date: 13 },
-  { date: 14 },
-  { date: 15 },
-  { date: 16 },
-  { date: 17 },
-  { date: 18 },
-  { date: 19 },
-  { date: 20 },
-  { date: 21 },
-  { date: 22 },
-  { date: 23 },
-  { date: 24 },
-  { date: 25 },
-  { date: 26 },
-  { date: 27 },
-  { date: 28 },
-  { date: 29 },
-  { date: 30 },
-];
+function ProfileCard() {
+  const { state } = useApp();
+  const user = state.user;
+  return (
+    <div className="profile-card">
+      <div className="profile-card__top">
+        <img
+          src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
+            user?.name || "User"
+          )}&background=c6f135&color=1a1a2e&size=80`}
+          alt="avatar"
+          className="profile-card__avatar"
+        />
+        <div>
+          <h3 className="profile-card__name">{user?.name || "User"}</h3>
+          <p className="profile-card__age">{user?.email}</p>
+        </div>
+      </div>
+      <div className="profile-card__stats">
+        <div>
+          <span className="profile-stat__value">{user?.height || "—"}</span>
+          <span className="profile-stat__label">Height</span>
+        </div>
+        <div>
+          <span className="profile-stat__value">{user?.weight || "—"}</span>
+          <span className="profile-stat__label">Weight</span>
+        </div>
+        <div>
+          <span className="profile-stat__value">{user?.gender || "—"}</span>
+          <span className="profile-stat__label">Gender</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
-const navItems = [
-  { icon: "🏠", label: "Home", active: true },
-  { icon: "📊", label: "Stats" },
-  { icon: "📅", label: "Schedule" },
-  { icon: "📋", label: "Plans" },
-  { icon: "👤", label: "Profile" },
-  { icon: "⚙️", label: "Settings" },
-];
+function ModalRouter() {
+  const { state } = useApp();
+  if (state.modal === "addWorkout") return <AddWorkoutModal />;
+  return null;
+}
 
+function Dashboard() {
+  const { state } = useApp();
+  const today = new Date().toLocaleString("default", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
 
-
-export default function App() {
   return (
     <div className="dashboard">
-      <Sidebar navItems={navItems}/>
+      <SideBar />
+
       <main className="dashboard__main">
-        {/* Header */}
         <header className="dashboard__header">
           <div>
-            <h1 className="dashboard__greeting">Good Morning, Albert</h1>
-            <p className="dashboard__sub">Let's do some workout today...</p>
+            <h1 className="dashboard__greeting">
+              Good Morning, {state.user?.name?.split(" ")[0]} 👋
+            </h1>
+            <p className="dashboard__sub">
+              {today} · Let's crush your goals today!
+            </p>
           </div>
           <div className="dashboard__header-actions">
             <button className="btn btn--pill">Weekly ▾</button>
@@ -86,35 +89,30 @@ export default function App() {
           </div>
         </header>
 
-        {/* Stat Cards */}
-        <div className="stats-row">
-          <StatCard value="1.2" label="Water liters" emoji="💧" />
-          <StatCard value="2.54" label="Kilo Calories" emoji="🔥" />
-          <StatCard value="124" label="Beats per minute" emoji="❤️" />
-          <StatCard value="13" label="Hours Sleeping" emoji="⏰" />
-        </div>
+        <StatsRow />
 
-        {/* Middle Row */}
         <div className="middle-row">
-          <WorkoutActivity  workoutData={workoutData}/>
-          <Progress />
+          <WorkoutChart />
+          <WorkoutList />
         </div>
 
-        {/* Bottom Row */}
-        <div className="bottom-row">
-          <Subscription />
-          <Payment />
-          <OfflineExercises />
-        </div>
+        <BMICalculator />
       </main>
 
-      {/* Right Panel */}
       <aside className="right-panel">
-        <ProfileCard/>
-        <Calendar calendarDays={calendarDays}/>
-        <VideoActivity />
-        <MostTrending />
+        <ProfileCard />
+        <Calendar />
       </aside>
+
+      <ModalRouter />
+      <Toast />
     </div>
   );
+}
+
+export default function App() {
+  const { state } = useApp();
+  if (state.loading) return <LoadingScreen />;
+  if (!state.token) return <AuthPage />;
+  return <Dashboard />;
 }
