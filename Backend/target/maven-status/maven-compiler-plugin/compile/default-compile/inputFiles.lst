@@ -1,0 +1,15 @@
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/FitmateApplication.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/config/PasswordConfig.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/config/SecurityConfig.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/controller/AuthController.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/controller/DashboardController.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/controller/ProfileController.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/controller/UserController.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/dto/LoginRequest.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/dto/UserProfileRequest.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/model/User.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/repository/UserRepository.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/security/JwtFilter.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/security/JwtUtil.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/service/AuthService.java
+/home/sumit/Desktop/Project_FItMate/Backend/src/main/java/com/fitmate/fitmate/service/UserService.java

@@ -10,3 +10,4 @@ public class FitmateApplication
 		SpringApplication.run(FitmateApplication.class, args);
 	}
 }
+
