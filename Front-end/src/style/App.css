@@ -134,6 +134,11 @@ img {
   font-weight: 700;
   color: #1a1a2e;
 }
+.auth-card__logo img{
+  object-fit: cover;
+
+}
+
 .auth-card__title {
   font-size: 26px;
   font-weight: 700;
@@ -186,6 +191,10 @@ img {
   font-size: 20px;
   font-weight: 700;
   color: #1a1a2e;
+}
+.sidebar__logo-icon img{
+  object-fit: cover !important;
+  height: 20px;
 }
 .sidebar__nav {
   flex: 1;

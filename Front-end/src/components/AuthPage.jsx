@@ -42,8 +42,8 @@ export default function AuthPage() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <div className="auth-card__logo">▽</div>
-        <h1 className="auth-card__title">FitTrack</h1>
+        <div className="auth-card__logo"><img src="finalLogo.png" alt="" height={100} /></div>
+        <h1 className="auth-card__title">FitMate</h1>
         <p className="auth-card__sub">
           {isLogin
             ? "Welcome back! Log in to continue."

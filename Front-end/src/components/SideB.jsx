@@ -20,7 +20,7 @@ export default function SideB() {
   return (
     <aside className="sidebar">
       <div className="sidebar__logo">
-        <div className="sidebar__logo-icon">▽</div>
+        <div className="sidebar__logo-icon"><img src='finalLogo.png' alt="" height={100} width={100}/></div>
       </div>
 
       <nav className="sidebar__nav">
