@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: 'https://project-fitmate.onrender.com/api' || "http://localhost:3000/api",
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000/api",
 });
+console.log(import.meta.env.VITE_API_URL)
 
 // Attach JWT token to every request automatically
 api.interceptors.request.use((config) => {
@@ -25,23 +26,23 @@ api.interceptors.response.use(
 
 export default api;
 
-// ─── Auth ──────────────────────────────────────────────────────────────────
+// ─── Auth ───────────────────────────────────────────────────────────────────
 export const registerUser = (data) => api.post("/auth/register", data);
 export const loginUser    = (data) => api.post("/auth/login", data);
 export const getMe        = ()     => api.get("/auth/me");
 
-// ─── Stats ─────────────────────────────────────────────────────────────────
+// ─── Stats ──────────────────────────────────────────────────────────────────
 export const getTodayStats  = ()     => api.get("/stats/today");
 export const updateStats    = (data) => api.put("/stats/today", data);
 export const getWeeklyStats = ()     => api.get("/stats/weekly");
 
-// ─── Workouts ──────────────────────────────────────────────────────────────
+// ─── Workouts ───────────────────────────────────────────────────────────────
 export const getWorkouts   = (date) => api.get("/workouts", { params: { date } });
 export const createWorkout = (data) => api.post("/workouts", data);
 export const toggleWorkout = (id)   => api.patch(`/workouts/${id}/toggle`);
 export const deleteWorkout = (id)   => api.delete(`/workouts/${id}`);
 
-// ─── Attendance ────────────────────────────────────────────────────────────
+// ─── Attendance ─────────────────────────────────────────────────────────────
 export const getAttendance = (year, month) =>
   api.get("/attendance", { params: { year, month } });
 export const markDate   = (date) => api.post("/attendance", { date });
