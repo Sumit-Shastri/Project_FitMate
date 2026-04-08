@@ -1,3 +1,4 @@
+// frontend/src/components/Sidebar.jsx
 import { useApp } from "../context/AppContext.jsx";
 
 const NAV = [
@@ -9,7 +10,7 @@ const NAV = [
   { icon: "⚙️", label: "Settings"  },
 ];
 
-export default function SideB() {
+export default function Sidebar() {
   const { state, dispatch } = useApp();
 
   function handleLogout() {
@@ -20,26 +21,26 @@ export default function SideB() {
   return (
     <aside className="sidebar">
       <div className="sidebar__logo">
-        <div className="sidebar__logo-icon"><img src='finalLogo.png' alt="" height={100} width={100}/></div>
+        <div className="sidebar__logo-icon">▽</div>
       </div>
 
       <nav className="sidebar__nav">
         {NAV.map((item, i) => (
           <button
             key={i}
-            className={`sidebar__nav-btn ${
-              state.activeNav === i ? "sidebar__nav-btn--active" : ""
-            }`}
+            className={`sidebar__nav-btn ${state.activeNav === i ? "sidebar__nav-btn--active" : ""}`}
             onClick={() => dispatch({ type: "SET_NAV", payload: i })}
             title={item.label}
           >
-            {item.icon}
+            <span className="sidebar__nav-icon">{item.icon}</span>
+            <span className="sidebar__nav-label">{item.label}</span>
           </button>
         ))}
       </nav>
 
       <button className="sidebar__logout" onClick={handleLogout} title="Logout">
-        🚪
+        <span className="sidebar__nav-icon">🚪</span>
+        <span className="sidebar__nav-label">Logout</span>
       </button>
     </aside>
   );
