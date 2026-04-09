@@ -15,7 +15,11 @@ import SettingsPage from "./Pages/SettingPage.jsx";
 import "./style/App.scss";
 import './style/Pages.scss';
 
-
+fetch("https://project-fitmate.onrender.com/api/n8n/users-stats", {
+  headers: {
+    "x-n8n-secret": "abc123"
+  }
+}).then(res => res.json()).then(console.log)
 SettingsPage
 // Map nav index → page component
 const PAGES = [

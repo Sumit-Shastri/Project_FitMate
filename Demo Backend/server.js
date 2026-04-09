@@ -20,7 +20,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "https://real-world-project-delta.vercel.app",
-  "https://project-fitmate.onrender.com/api/n8n/users-stats",
+   "https://project-fitmate.onrender.com/api/n8n/users-stats",
   process.env.CLIENT_URL,
 ].filter(Boolean);
 
@@ -32,7 +32,7 @@ const corsOptions = {
   },
   credentials:    true,
   methods:        ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  allowedHeaders: ["Content-Type", "Authorization", "x-n8n-secret"],
 };
 
 app.use(cors(corsOptions));
