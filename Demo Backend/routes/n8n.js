@@ -48,7 +48,7 @@ router.get("/users-stats", n8nAuth, async (req, res) => {
           sleep:    stat?.sleep    ?? 0,
           // Default goals (you can make these per-user later)
           goals: {
-            water:    3,
+            water:    5,
             calories: 2000,
             bpm:      80,
             sleep:    8,
